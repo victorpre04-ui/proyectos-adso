@@ -1,0 +1,7 @@
+
+--- Escaneo del 2026-03-25 20:22:44.231773 ---
+[+] 8.8.8.8 está ONLINE
+[+] 1.1.1.1 está ONLINE
+[+] google.com está ONLINE
+[+] 192.168.1.1 está ONLINE
+[+] github.com está ONLINE
