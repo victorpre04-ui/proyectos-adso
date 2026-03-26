@@ -1,13 +1,19 @@
-# Mi primer script de seguridad en Python
 import os
 
-print("--- BIENVENIDO AL MONITOR DE RED DE VICTOR ---")
-ip = input("Introduce una dirección IP para probar conexion (ejemplo: 8.8.8.8): ")
+print("--- ESCÁNER DE RED ADSO V2.0 ---")
 
-print(f"Verificando estado de {ip}...")
-respuesta = os.system(f"ping -c 4 {ip}")
+# Esta es una LISTA de Python (va entre corchetes [])
+objetivos = ["8.8.8.8", "1.1.1.1", "google.com", "192.168.1.12", "github.com"]
 
-if respuesta == 0:
-   print(f"\n[ÉXITO] La IP {ip} esta activa.")
-else:
-   print(f"\n[ALERTA] no se pudo contactar con {ip}.")
+# El bucle 'for' recorre cada objetivo uno por uno
+for host in objetivos:
+    print(f"\n>>> Verificando: {host}")
+    # Lanzamos el ping con solo 2 paquetes para que sea rápido (-c 2)
+    respuesta = os.system(f"ping -c 2 {host}")
+    
+    if respuesta == 0:
+        print(f"[+] {host} está ONLINE")
+    else:
+        print(f"[-] {host} está OFFLINE o no responde")
+
+print("\n--- Escaneo de lista finalizado ---")
