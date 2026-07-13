@@ -7,11 +7,11 @@ from datetime import datetime
 app = Flask(__name__)
 ARCHIVO_DATOS = "inventario_datos.json"
 
-# 👥 INGRESA LOS DOS NOMBRES DE TUS TÉCNICOS AQUÍ ENTRE LAS COMILLAS
+# 👥 AQUI VAN LOS NOMBRES DE LOS TÉCNICOS 
 LISTA_TECNICOS = [
     "Edinson Zuñiga",
-    "Luis Carlos Saavedra"
-    "Hely Fuquene contratista"
+    "Luis Carlos Saavedra",
+    "Hely Fuquene contratista",
     "Otro"
 ]
 
@@ -160,6 +160,14 @@ HTML_BASE = """
             `;
             contenedor.appendChild(nuevaFila);
         }
+        function alternarTabla() {
+            const cajaTabla = document.getElementById('contenedor-tabla-stock');
+            if (cajaTabla.style.display === "none") {
+                cajaTabla.style.display = "block";
+            } else {
+                cajaTabla.style.display = "none";
+            }
+        }
     </script>
 </head>
 <body>
@@ -177,9 +185,9 @@ HTML_BASE = """
     {% endif %}
 
     <div class="tabs-container">
-        <button class="tab-button active" onclick="abrirVentana(event, 'ventana-stock')">📋 Stock y Reportes</button>
-        <button class="tab-button" onclick="abrirVentana(event, 'ventana-salidas')">📤 Ventana 1: Entregas (Outflow)</button>
-        <button class="tab-button" onclick="abrirVentana(event, 'ventana-entradas')">📥 Ventana 2: Cargues y Devoluciones (Inflow)</button>
+        <button class="tab-button active" onclick="abrirVentana(event, 'ventana-stock')">📋 STOCK Y REPORTES</button>
+        <button class="tab-button" onclick="abrirVentana(event, 'ventana-salidas')">📤 SALIDAS Y ENTREGAS</button>
+        <button class="tab-button" onclick="abrirVentana(event, 'ventana-entradas')">📥 ENTRADAS Y DEVOLUCIONES</button>
     </div>
 
     <div class="container">
@@ -212,22 +220,27 @@ HTML_BASE = """
                 </div>
             </div>
 
-            <table>
-                <thead>
-                    <tr><th>Descripción de Artículo</th><th>Cantidad Actual</th></tr>
-                </thead>
-                <tbody>
-                    {% for prod, cant in datos.productos.items() %}
-                    <tr>
-                        <td style="font-weight: 500;">{{ prod }}</td>
-                        <td><span class="badge-cantidad">{{ cant }} unidades</span></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            <button type="button" class="btn" style="background-color: #4b5563; margin-bottom: 15px;" onclick="alternarTabla()">
+                👁️ Mostrar / Ocultar Tabla de Existencias
+            </button>
 
-        <!-- 🖥️ VENTANA 1: ENTREGAS (OUTFLOW) -->
+            <div id="contenedor-tabla-stock">
+                <table>
+                    <thead>
+                        <tr><th>Descripción de Artículo</th><th>Cantidad Actual</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for prod, cant in datos.productos.items() %}
+                        <tr>
+                            <td style="font-weight: 500;">{{ prod }}</td>
+                            <td><span class="badge-cantidad">{{ cant }} unidades</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        <!-- 🖥️ VENTANA 1: SALIDAS Y ENTREGAS -->
         <div id="ventana-salidas" class="window-content">
             <h2>📤 Registro de Entregas a Técnicos</h2>
             <form action="/movimiento" method="post">
@@ -259,7 +272,7 @@ HTML_BASE = """
             </form>
         </div>
 
-        <!-- 🖥️ VENTANA 2: CARGUES Y DEVOLUCIONES (INFLOW) -->
+        <!-- 🖥️ VENTANA 2: ENTRADAS Y DEVOLUCIONES (INFLOW) -->
         <div id="ventana-entradas" class="window-content">
             <h2>📥 Cargue de Materiales y Devoluciones de Obra</h2>
             <form action="/movimiento" method="post">
