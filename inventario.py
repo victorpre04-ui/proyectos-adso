@@ -129,13 +129,19 @@ HTML_BASE = """
     
     <script>
         function abrirVentana(evt, nombreVentana) {
-            const contenidos = document.getElementsByClassName("window-content");
-            for (let i = 0; i < contenidos.length; i++) contenidos[i].className = contenidos[i].className.replace(" active", "");
-            const botones = document.getElementsByClassName("tab-button");
-            for (let i = 0; i < botones.length; i++) botones[i].className = botones[i].className.replace(" active", "");
-            document.getElementById(nombreVentana).className += " active";
-            evt.currentTarget.className += " active";
-        }
+    const contenidos = document.querySelectorAll(".window-content");
+    contenidos.forEach(function(contenido) {
+        contenido.classList.remove("active");
+    });
+
+    const botones = document.querySelectorAll(".tab-button");
+    botones.forEach(function(boton) {
+        boton.classList.remove("active");
+    });
+
+    document.getElementById(nombreVentana).classList.add("active");
+    evt.currentTarget.classList.add("active");
+}
 
         function agregarFilaSalida() {
             const contenedor = document.getElementById('contenedor-salidas');
@@ -239,6 +245,8 @@ HTML_BASE = """
                     </tbody>
                 </table>
             </div>
+            </div>
+            
 
         <!-- 🖥️ VENTANA 1: SALIDAS Y ENTREGAS -->
         <div id="ventana-salidas" class="window-content">
