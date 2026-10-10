@@ -1,6 +1,6 @@
 {
     "productos": {
-        "TUBO COBRE RIGIDO 1/2\" X 3M TIPO L": 35,
+        "TUBO COBRE RIGIDO 1/2\" X 3M TIPO L": 34,
         "CODO COBRE 90\u00b0 X 1/2\"": 135,
         "CODO COBRE 45\u00b0 X 1/2\"": 100,
         "UNION CON TOPE COBRE 1/2\"": 120,
@@ -164,6 +164,20 @@
             "cantidad": 25,
             "responsable": "PROVEEDOR / CENTRAL",
             "concepto": "ABASTECIMIENTO / COMPRAS"
+        },
+        {
+            "tipo": "SALIDA",
+            "material": "TUBO COBRE RIGIDO 1/2\" X 3M TIPO L",
+            "cantidad": 2,
+            "responsable": "Edinson Zu\u00f1iga",
+            "concepto": "casa"
+        },
+        {
+            "tipo": "ENTRADA",
+            "material": "TUBO COBRE RIGIDO 1/2\" X 3M TIPO L",
+            "cantidad": 1,
+            "responsable": "Edinson Zu\u00f1iga",
+            "concepto": "DEVOLUCION DE OBRA"
         }
     ]
 }
