@@ -1,0 +1,16 @@
+# Archivos generados por Maven
+**/target/
+
+# Bases de datos SQLite locales
+**/*.db
+**/*.db-journal
+**/*.db-shm
+**/*.db-wal
+
+# Configuración local de editores
+.vscode/
+.idea/
+
+# Archivos temporales
+*.class
+*.log
