@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario de materiales</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+
+        h1 {
+            color: #174a70;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #174a70;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .sin-datos {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff3cd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Sistema de gestión de inventario</h1>
+    <p>Consulta de materiales registrados en la base de datos.</p>
+    <h2>Registrar material</h2>
+
+<p th:if="${mensaje}" th:text="${mensaje}"
+   style="color: green;"></p>
+
+<p th:if="${error}" th:text="${error}"
+   style="color: red;"></p>
+
+<form th:action="@{/registrar}" th:object="${material}" method="post">
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" th:field="*{nombre}" required>
+
+    <label for="categoria">Categoría:</label>
+    <input type="text" id="categoria" th:field="*{categoria}" required>
+
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad" th:field="*{cantidad}"
+           min="0" required>
+
+    <label for="stockMinimo">Stock mínimo:</label>
+    <input type="number" id="stockMinimo" th:field="*{stockMinimo}"
+           min="0" required>
+
+    <button type="submit">Registrar material</button>
+
+</form>
+
+    <table th:if="${not #lists.isEmpty(materiales)}">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Cantidad</th>
+                <th>Stock mínimo</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="material : ${materiales}">
+                <td th:text="${material.id}"></td>
+                <td th:text="${material.nombre}"></td>
+                <td th:text="${material.categoria}"></td>
+                <td th:text="${material.cantidad}"></td>
+                <td th:text="${material.stockMinimo}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="sin-datos"
+       th:if="${#lists.isEmpty(materiales)}">
+        No hay materiales registrados en el inventario.
+    </p>
+
+</body>
+</html>
