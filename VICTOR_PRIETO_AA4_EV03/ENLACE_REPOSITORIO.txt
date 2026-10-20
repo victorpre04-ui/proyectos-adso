@@ -1,0 +1,3 @@
+Repositorio del proyecto formativo: https://github.com/victorpre04-ui/proyectos-adso
+
+Nota: la versión React de esta evidencia se debe agregar al repositorio mediante Git después de revisarla.
